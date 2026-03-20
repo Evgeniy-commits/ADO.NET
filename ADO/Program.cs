@@ -20,14 +20,23 @@ namespace ADO
 									   "MultiSubnetFailover=False";
 			
 			Connector connector = new Connector(connection_string);
+			connector.Insert("INSERT Directors (first_name, last_name) VALUES (N'Guy', N'Richie'); ");
+			Console.WriteLine($"PK Max:\t{connector.GetMaxPrimaryKey("Directors")}");
 
 			string cmd =
 			@"SELECT movie_id, title, release_date, first_name, last_name 
 			FROM Movies, Directors WHERE director = director_id";
-			connector.Select(cmd);
-			Console.WriteLine($"Количество записей: {connector.Scalar("SELECT COUNT(*) FROM Movies")}");
-			connector.Select("SELECT * FROM Directors");
+			//connector.Select(cmd);
+			connector.Select("*", "Directors");
 			Console.WriteLine($"Количество записей: {connector.Scalar("SELECT COUNT(*) FROM Directors")}");
+			//connector.Select("SELECT * FROM Directors");
+			connector.Select
+				(
+					"title, release_date, first_name, last_name",
+					"Movies, Directors",
+					"director = director_id"
+				);
+			Console.WriteLine($"Количество записей: {connector.Scalar("SELECT COUNT(*) FROM Movies")}");
 		}
 	}
 }
