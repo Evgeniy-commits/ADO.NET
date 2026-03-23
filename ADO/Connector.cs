@@ -25,17 +25,72 @@ namespace ADO
 			SqlCommand command = new SqlCommand(cmd, connection);
 
 			SqlDataReader reader = command.ExecuteReader();
+			int field = reader.FieldCount;
+			string[] col = new string[field];
 			for (int i = 0; i < reader.FieldCount; i++)
-				Console.Write(reader.GetName(i) + "\t\t");
+				col[i] = reader.GetName(i);
+			//Console.Write(reader.GetName(i));
 			Console.WriteLine();
+			int row = 0;
+			while (reader.Read()) row++;
+			reader.Close();
+			reader = command.ExecuteReader();
+			string[][] data = new string[row][];
+			
+			int curRow = 0;
 			while (reader.Read())
 			{
+				string[] numRow = new string[field];
 				for (int i = 0; i < reader.FieldCount; i++)
-					Console.Write($"{reader[i]}\t\t");
-				Console.WriteLine();
+				{
+					object val = reader[i];
+					if (val == null) numRow[i] = "";
+					else
+					{
+						string strVal = val.ToString();
+						numRow[i] = dateOnly(strVal);
+					}
+				}
+					//numRow[i] = reader[i] == null ? "" : reader[i].ToString();
+				//Console.Write($"{reader[i]}\t\t");
+				//Console.WriteLine();
+				data[curRow] = numRow;
+				curRow++;
 			}
 			reader.Close();
 			connection.Close();
+
+			if (data.Length == 0)
+			{
+				Console.WriteLine("Нет данных");
+				return;
+			}
+
+			int colCount = col.Length;
+			int[] width = new int[colCount];
+			for (int i = 0; i < colCount; i++)
+				width[i] = col[i].Length;
+			foreach (string[] dataRow in data)
+			{
+				for (int colIndex = 0; colIndex < colCount; colIndex++)
+				{
+					if (dataRow[colIndex].Length > width[colIndex])
+						width[colIndex] = dataRow[colIndex].Length;
+
+				}
+			}
+
+			for (int colIndex = 0; colIndex < colCount; colIndex++) 
+				Console.Write(col[colIndex].PadRight(width[colIndex]) + "\t");
+			Console.WriteLine();
+			foreach (string[] dataRow in data)
+			{
+				for (int colIndex = 0; colIndex < colCount; colIndex++)
+				{
+					Console.Write(dataRow[colIndex].PadRight(width[colIndex]) + "\t");
+				}
+				Console.WriteLine();
+			}
 		}
 
 		public void Select(string fields, string tables, string condition = "")
@@ -88,6 +143,18 @@ namespace ADO
 					Console.WriteLine("Good");
 			}
 			connection.Close();
+		}
+
+		public string dateOnly (string input)
+		{
+			if (string.IsNullOrWhiteSpace(input)) return input;
+
+			if (input.Contains(' '))
+			{
+				string date = input.Split(' ')[0];
+				return date;
+			}
+			return input;
 		}
 	}
 }
