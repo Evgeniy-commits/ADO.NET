@@ -37,6 +37,11 @@ namespace ADO
 					"director = director_id"
 				);
 			Console.WriteLine($"Количество записей: {connector.Scalar("SELECT COUNT(*) FROM Movies")}");
+
+			string[] key = connector.GetPrimaryKeyName("Movies");
+			Console.WriteLine($"Найдено первичных ключей: {key.Length}");
+			for ( int i = 0; i < key.Length; i++) 
+				Console.WriteLine($"Имя первичного ключа: {key[i]}");
 		}
 	}
 }

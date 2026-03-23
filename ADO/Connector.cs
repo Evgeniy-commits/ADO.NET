@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
 
 namespace ADO
 {
@@ -125,10 +127,11 @@ namespace ADO
 		}
 		public int GetNextPrimaryKey(string table)
 		{
-			return GetMaxPrimaryKey(table) + 1;
+			return (GetMaxPrimaryKey(table) + 1);
 		}
 		public void Insert(string cmd)
 		{ 
+
 			SqlCommand command = new SqlCommand (cmd, connection);
 			connection.Open();
 			try
@@ -141,8 +144,57 @@ namespace ADO
 				Console.WriteLine(ex.Message);
 				if (ex.GetType() == typeof(SqlException) && ex.Message.Contains("_id"))
 					Console.WriteLine("Good");
+				GetNextPrimaryKey(GetTableName(cmd));
 			}
+			finally
+			{
+				connection.Close();
+			}
+			//connection.Close();
+		}
+
+		public string GetTableName(string cmd)
+		{
+			SqlCommand command = new SqlCommand(cmd, connection);
+			System.Text.RegularExpressions.Match match = System.Text.RegularExpressions.Regex.Match
+			(cmd, @"INSERT\s+([\w\.]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 			connection.Close();
+			return match.Success ? match.Groups[1].Value : null;
+		}
+
+		public string[] GetPrimaryKeyName(string tableName)
+		{
+			if (string.IsNullOrWhiteSpace(tableName)) Console.WriteLine("Имя не может быть пустым");
+
+			string query = $@"SELECT COLUMN_NAME
+				FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+				WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + CONSTRAINT_NAME), 'IsPrimaryKey') = 1
+				AND TABLE_NAME = N'{tableName}'
+				AND TABLE_SCHEMA = 'dbo'
+				ORDER BY ORDINAL_POSITION";
+
+			string[] primaryKeyColumns = new string[0];
+			int count = 0;
+
+			connection.Open();
+			SqlCommand command = new SqlCommand (query, connection);
+			SqlDataReader reader = command.ExecuteReader();
+
+			while (reader.Read())
+			{
+				string[] buf = new string[count + 1];
+				for (int j = 0; j < primaryKeyColumns.Length; j++)
+					buf[j] = primaryKeyColumns[j];
+				primaryKeyColumns = buf;
+				primaryKeyColumns[count] = reader.GetString(0);
+				count++;
+			}
+			//Console.WriteLine($"Найдено первичных ключей: {primaryKeyColumns.Length}");
+			reader.Close();
+			command.Dispose();
+			connection.Close();
+
+			return primaryKeyColumns;
 		}
 
 		public string dateOnly (string input)
@@ -156,5 +208,6 @@ namespace ADO
 			}
 			return input;
 		}
+
 	}
 }
