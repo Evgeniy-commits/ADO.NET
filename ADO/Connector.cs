@@ -130,8 +130,7 @@ namespace ADO
 			return (GetMaxPrimaryKey(table) + 1);
 		}
 		public void Insert(string cmd)
-		{ 
-
+		{
 			SqlCommand command = new SqlCommand (cmd, connection);
 			connection.Open();
 			try
@@ -144,18 +143,15 @@ namespace ADO
 				Console.WriteLine(ex.Message);
 				if (ex.GetType() == typeof(SqlException) && ex.Message.Contains("_id"))
 					Console.WriteLine("Good");
-				GetNextPrimaryKey(GetTableName(cmd));
 			}
-			finally
-			{
-				connection.Close();
-			}
-			//connection.Close();
+			Console.WriteLine($"Следующий ПК: {GetNextPrimaryKey(GetTableName(cmd))}");
+			connection.Close();
 		}
 
 		public string GetTableName(string cmd)
 		{
 			SqlCommand command = new SqlCommand(cmd, connection);
+			//connection.Open();
 			System.Text.RegularExpressions.Match match = System.Text.RegularExpressions.Regex.Match
 			(cmd, @"INSERT\s+([\w\.]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 			connection.Close();
