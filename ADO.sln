@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36811.4 d17.14
+VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADO", "ADO\ADO.csproj", "{852840EF-9262-407C-A2C2-9C8817AE89AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBtools", "DBtools\DBtools.csproj", "{187F1144-7835-48D9-8B58-75432A6664D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLLtest", "DLLtest\DLLtest.csproj", "{074958E9-5FCC-48F0-B768-7FB101C14FED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{852840EF-9262-407C-A2C2-9C8817AE89AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{852840EF-9262-407C-A2C2-9C8817AE89AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{852840EF-9262-407C-A2C2-9C8817AE89AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{187F1144-7835-48D9-8B58-75432A6664D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{187F1144-7835-48D9-8B58-75432A6664D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{187F1144-7835-48D9-8B58-75432A6664D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{187F1144-7835-48D9-8B58-75432A6664D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{074958E9-5FCC-48F0-B768-7FB101C14FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{074958E9-5FCC-48F0-B768-7FB101C14FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074958E9-5FCC-48F0-B768-7FB101C14FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074958E9-5FCC-48F0-B768-7FB101C14FED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
