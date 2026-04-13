@@ -62,8 +62,8 @@ namespace Academy
 			d_directions = connector.GetDictionary("Directions");
 			d_groups = connector.GetDictionary("Groups");
 
-			cbStudentsGroup.Items.AddRange(d_groups.Keys.ToArray());
 			cbGroupsDirection.Items.AddRange(d_directions.Keys.ToArray());
+			cbStudentsGroup.Items.AddRange(d_groups.Keys.ToArray());
 			cbStudentsDirection.Items.AddRange(d_directions.Keys.ToArray());
 		}
 
@@ -86,7 +86,13 @@ namespace Academy
 
 		private void cbStudentsDirection_SelectedIndexChanged(object sender, EventArgs e)
 		{
-
+			d_groups = connector.GetDictionary
+				(
+					"Groups", 
+					$"direction = {d_directions[cbStudentsDirection.SelectedItem.ToString()]}"
+				);
+			cbStudentsGroup.Items.Clear();
+			cbStudentsGroup.Items.AddRange(d_groups.Keys.ToArray());
 			dgvStudents.DataSource = connector.Select
 				(
 					queries[0].ToString() +
