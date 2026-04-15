@@ -12,6 +12,7 @@ namespace Academy
 {
 	public partial class StudentForm : HumanForm
 	{
+		internal Models.Student student;
 		public StudentForm()
 		{
 			InitializeComponent();
@@ -31,15 +32,11 @@ namespace Academy
 
 		protected override void buttonOk_Click(object sender, EventArgs e)
 		{
-			Models.Student student = new Models.Student
+			base.buttonOk_Click(sender, e);
+
+			student = new Models.Student
 				(
-					tbLastName.Text,
-					tbFirstName.Text,
-					tbMiddleName.Text,
-					dtpBirthDate.Value.ToString("yyyy-MM-dd"),
-					tbEmail.Text,
-					tbPhone.Text,
-					pbPhoto.Image,
+					human,
 					Convert.ToInt32(cbGroup.SelectedValue)
 				);
 
