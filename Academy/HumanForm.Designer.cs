@@ -38,7 +38,7 @@
 			this.dtpBirthDate = new System.Windows.Forms.DateTimePicker();
 			this.pbPhoto = new System.Windows.Forms.PictureBox();
 			this.buttonBrowse = new System.Windows.Forms.Button();
-			this.tиУьфшд = new System.Windows.Forms.TextBox();
+			this.tbEmail = new System.Windows.Forms.TextBox();
 			this.tbPhone = new System.Windows.Forms.TextBox();
 			this.labelEmail = new System.Windows.Forms.Label();
 			this.labelPhone = new System.Windows.Forms.Label();
@@ -146,15 +146,15 @@
 			this.buttonBrowse.Text = "Обзор";
 			this.buttonBrowse.UseVisualStyleBackColor = true;
 			// 
-			// tиУьфшд
+			// tbEmail
 			// 
-			this.tиУьфшд.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-			this.tиУьфшд.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
-			this.tиУьфшд.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.tиУьфшд.Location = new System.Drawing.Point(223, 167);
-			this.tиУьфшд.Name = "tиУьфшд";
-			this.tиУьфшд.Size = new System.Drawing.Size(374, 31);
-			this.tиУьфшд.TabIndex = 10;
+			this.tbEmail.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.tbEmail.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
+			this.tbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.tbEmail.Location = new System.Drawing.Point(223, 167);
+			this.tbEmail.Name = "tbEmail";
+			this.tbEmail.Size = new System.Drawing.Size(374, 31);
+			this.tbEmail.TabIndex = 10;
 			// 
 			// tbPhone
 			// 
@@ -196,6 +196,7 @@
 			this.buttonOk.TabIndex = 14;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.UseVisualStyleBackColor = true;
+			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
 			// 
 			// buttonCancel
 			// 
@@ -212,13 +213,13 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(845, 359);
+			this.ClientSize = new System.Drawing.Size(844, 352);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.labelPhone);
 			this.Controls.Add(this.labelEmail);
 			this.Controls.Add(this.tbPhone);
-			this.Controls.Add(this.tиУьфшд);
+			this.Controls.Add(this.tbEmail);
 			this.Controls.Add(this.buttonBrowse);
 			this.Controls.Add(this.pbPhoto);
 			this.Controls.Add(this.dtpBirthDate);
@@ -230,6 +231,8 @@
 			this.Controls.Add(this.labelFirstName);
 			this.Controls.Add(this.labelLastName);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "HumanForm";
 			this.ShowInTaskbar = false;
 			this.Text = "HumanForm";
@@ -245,17 +248,17 @@
 		private System.Windows.Forms.Label labelFirstName;
 		private System.Windows.Forms.Label labelMiddleName;
 		private System.Windows.Forms.Label labelBirthDate;
-		private System.Windows.Forms.TextBox tbLastName;
-		private System.Windows.Forms.TextBox tbFirstName;
-		private System.Windows.Forms.TextBox tbMiddleName;
-		private System.Windows.Forms.DateTimePicker dtpBirthDate;
-		private System.Windows.Forms.PictureBox pbPhoto;
 		private System.Windows.Forms.Button buttonBrowse;
-		private System.Windows.Forms.TextBox tиУьфшд;
-		private System.Windows.Forms.TextBox tbPhone;
 		private System.Windows.Forms.Label labelEmail;
 		private System.Windows.Forms.Label labelPhone;
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonCancel;
+		protected System.Windows.Forms.TextBox tbLastName;
+		protected System.Windows.Forms.TextBox tbFirstName;
+		protected System.Windows.Forms.TextBox tbMiddleName;
+		protected System.Windows.Forms.DateTimePicker dtpBirthDate;
+		protected System.Windows.Forms.TextBox tbEmail;
+		protected System.Windows.Forms.TextBox tbPhone;
+		protected System.Windows.Forms.PictureBox pbPhoto;
 	}
 }

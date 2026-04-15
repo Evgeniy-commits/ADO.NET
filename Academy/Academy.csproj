@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBase.cs" />
     <Compile Include="HumanForm.cs">
       <SubType>Form</SubType>
     </Compile>
