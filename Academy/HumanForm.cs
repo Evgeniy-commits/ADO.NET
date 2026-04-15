@@ -11,14 +11,14 @@ using System.Configuration;
 
 namespace Academy
 {
-	public abstract partial class HumanForm : Form
+	public partial class HumanForm : Form
 	{
-		public HumanForm()
+		protected HumanForm()
 		{
 			InitializeComponent();
 		}
 
-		protected abstract void buttonOk_Click(object sender, EventArgs e);
-		
+		protected virtual void buttonOk_Click(object sender, EventArgs e)
+		{ }
 	}
 }

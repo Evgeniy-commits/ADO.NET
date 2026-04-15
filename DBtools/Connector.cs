@@ -132,17 +132,14 @@ namespace DBtools
 			string[] s_fields = fields.Split(',');
 			string[] s_values = values.Split(',');
 			string parsed_fields = "";
-			string parsed_values = ""; // $"N'{s_values[0]}',";
+			string parsed_values = "";
 			for (int i = s_fields[0].Contains("_id") ? 1 : 0; i < s_fields.Length; i++)
 			{
 				if (s_values[i] == "") continue;
 				condition += $" {s_fields[i]} = N'{s_values[i]}' ";
 				parsed_fields += s_fields[i];
 				if(i != s_fields.Length - 1) parsed_fields += ",";
-				//if (s_values[i].Length > 1)
 				parsed_values += s_values[i][0] != 'N' && s_values[i].Length > 1 && s_values[i][1] != '\'' ? $"N'{s_values[i]}'" : s_values[i];
-				//else 
-				//	parsed_values += s_values[i];
 				if (i != s_fields.Length - 1)
 				{
 					condition += "AND";
