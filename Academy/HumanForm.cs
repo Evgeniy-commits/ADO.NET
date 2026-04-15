@@ -22,6 +22,7 @@ namespace Academy
 		{
 			if(human != null)
 			{
+				if(human.id != 0) labelID.Text = $"ID:{human.id}";
 				tbLastName.Text = human.last_name;
 				tbFirstName.Text = human.first_name;
 				tbMiddleName.Text = human.middle_name;
@@ -30,18 +31,19 @@ namespace Academy
 				tbPhone.Text = human.phone;
 			}
 		}
-
+		
 		protected virtual void buttonOk_Click(object sender, EventArgs e)
 		{
 			human = new Models.Human
 				(
+					labelID.Text == "" ? 0 : Convert.ToInt32(labelID.Text.Split(':').Last()),
 					tbLastName.Text,
 					tbFirstName.Text,
 					tbMiddleName.Text,
 					dtpBirthDate.Value.ToString("yyyy-MM-dd"),
 					tbEmail.Text,
 					tbPhone.Text,
-					pbPhoto.Image					
+					pbPhoto.Image
 				);
 		}
 	}
