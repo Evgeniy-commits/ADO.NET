@@ -257,8 +257,8 @@
 		protected System.Windows.Forms.TextBox tbFirstName;
 		protected System.Windows.Forms.TextBox tbMiddleName;
 		protected System.Windows.Forms.DateTimePicker dtpBirthDate;
-		protected System.Windows.Forms.TextBox tbEmail;
-		protected System.Windows.Forms.TextBox tbPhone;
 		protected System.Windows.Forms.PictureBox pbPhoto;
+		public System.Windows.Forms.TextBox tbEmail;
+		public System.Windows.Forms.TextBox tbPhone;
 	}
 }
