@@ -130,10 +130,12 @@
 			// pbPhoto
 			// 
 			this.pbPhoto.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pbPhoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.pbPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.pbPhoto.Location = new System.Drawing.Point(626, 18);
 			this.pbPhoto.Name = "pbPhoto";
 			this.pbPhoto.Size = new System.Drawing.Size(199, 217);
+			this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pbPhoto.TabIndex = 8;
 			this.pbPhoto.TabStop = false;
 			// 
@@ -146,6 +148,7 @@
 			this.buttonBrowse.TabIndex = 9;
 			this.buttonBrowse.Text = "Обзор";
 			this.buttonBrowse.UseVisualStyleBackColor = true;
+			this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
 			// 
 			// tbEmail
 			// 
