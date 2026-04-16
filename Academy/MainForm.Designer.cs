@@ -267,6 +267,7 @@
 			this.dgvTeachers.Name = "dgvTeachers";
 			this.dgvTeachers.Size = new System.Drawing.Size(675, 300);
 			this.dgvTeachers.TabIndex = 1;
+			this.dgvTeachers.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTeachers_CellMouseDoubleClick);
 			// 
 			// MainForm
 			// 

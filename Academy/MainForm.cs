@@ -121,5 +121,11 @@ namespace Academy
 			if(form.ShowDialog() == DialogResult.OK)
 				tabControl_SelectedIndexChanged(tabControl, null);
 		}
+
+		private void dgvTeachers_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			TeacherForm form = new TeacherForm(Convert.ToInt32(dgvTeachers.Rows[e.RowIndex].Cells["teacher_id"].Value));
+			form.ShowDialog();
+		}
 	}
 }

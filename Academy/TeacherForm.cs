@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Academy.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,16 @@ namespace Academy
 		public TeacherForm()
 		{
 			InitializeComponent();
+		}
+		public TeacherForm(int id) : this()
+		{
+			DataTable data = DataBase.Connector.Select("*", "Teachers", $"teacher_id = {id}");
+			teacher = new Models.Teacher(data.Rows[0].ItemArray);
+			human = teacher;
+			Extract();
+			this.dtpWorkSince.Value = Convert.ToDateTime(teacher.work_since);
+			this.tbRate.Text = teacher.rate.ToString();
+			pbPhoto.Image = DataBase.Connector.DownloadPhoto("Teachers", "photo", teacher.id);
 		}
 		protected override void buttonOk_Click(object sender, EventArgs e)
 		{
