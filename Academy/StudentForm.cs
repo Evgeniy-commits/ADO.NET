@@ -17,13 +17,6 @@ namespace Academy
 		{
 			InitializeComponent();
 
-			//tbLastName.Text = "Фамилия";
-			//tbFirstName.Text = "Имя";
-			//tbMiddleName.Text = "Отчество";
-			//dtpBirthDate.Text = "1989.02.19";
-			//tbEmail.Text = "EV@mail.ru";
-			//tbPhone.Text = "+7(999)999-99-99";
-
 			DataTable groups = DataBase.Connector.Select("SELECT * FROM Groups");
 			cbGroup.DataSource = groups;
 			cbGroup.DisplayMember = "group_name";
@@ -32,7 +25,6 @@ namespace Academy
 		public StudentForm(int id) : this()
 		{
 			DataTable data = DataBase.Connector.Select("*","Students",$"stud_id = {id}");
-			//object[] arr = data.Rows[0].ItemArray; 
 			student = new Models.Student(data.Rows[0].ItemArray);
 			human = student;
 			Extract();
@@ -42,18 +34,18 @@ namespace Academy
 		protected override void buttonOk_Click(object sender, EventArgs e)
 		{
 			base.buttonOk_Click(sender, e);
-
 			student = new Models.Student
 				(
 					human,
 					Convert.ToInt32(cbGroup.SelectedValue)
 				);
-			//object id = DataBase.Connector.Scalar($"SELECT stud_id FROM Students WHERE {student.GetCondition()}");
-			if ( student.id == 0 ) 
-				DataBase.Connector.Insert("Students", $"{student.GetNames()}", $"{student.GetValues()}");
+			if ( student.id == 0 ) student.id = Convert.ToInt32(DataBase.Connector.Scalar
+				(
+				$"INSERT Students({student.GetNames()}) VALUES ({student.GetValues()});SELECT SCOPE_IDENTITY()")
+				);
 			else 
 				DataBase.Connector.Update($"UPDATE Students SET {student.GetUpdateString()} WHERE stud_id={student.id}");
-			if(student.photo != null) 
+			if (student.photo != null)
 				DataBase.Connector.UploadPhoto(student.SerializePhoto(), student.id, "photo", "Students");
 			
 			//DataBase.Connector.Insert
