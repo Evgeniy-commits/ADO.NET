@@ -114,5 +114,12 @@ namespace Academy
 			StudentForm form = new StudentForm(Convert.ToInt32(dgvStudents.Rows[e.RowIndex].Cells["stud_id"].Value));
 			form.ShowDialog();
 		}
+
+		private void buttonAddTeacher_Click(object sender, EventArgs e)
+		{
+			TeacherForm form = new TeacherForm();
+			if(form.ShowDialog() == DialogResult.OK)
+				tabControl_SelectedIndexChanged(tabControl, null);
+		}
 	}
 }

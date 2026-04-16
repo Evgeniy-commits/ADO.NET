@@ -47,13 +47,6 @@ namespace Academy
 				DataBase.Connector.Update($"UPDATE Students SET {student.GetUpdateString()} WHERE stud_id={student.id}");
 			if (student.photo != null)
 				DataBase.Connector.UploadPhoto(student.SerializePhoto(), student.id, "photo", "Students");
-			
-			//DataBase.Connector.Insert
-			//	(
-			//		"Students",
-			//		"last_name,first_name,middle_name,birth_date,email,phone,[group]",
-			//		$"{tbLastName.Text},{tbFirstName.Text},{tbMiddleName.Text},{dtpBirthDate.Value.ToString("yyyy-MM-dd")},{tbEmail.Text},{tbPhone.Text},{cbGroup.SelectedValue}"
-			//	);
 		}
 	}
 }

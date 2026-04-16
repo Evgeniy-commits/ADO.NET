@@ -19,7 +19,12 @@ namespace Academy.Models
 		internal string phone;
 		internal Image photo;
 
-		public Human(int id, string last_name, string first_name, string middle_name, string birth_date, string email, string phone, Image photo)
+		public Human
+			(
+			int id,
+			string last_name, string first_name, string middle_name,
+			string birth_date, string email, string phone, Image photo
+			)
 		{
 			this.id = id;
 			this.last_name = last_name;
@@ -71,6 +76,10 @@ namespace Academy.Models
 			return $" last_name=N'{last_name}' AND first_name=N'{first_name}' AND middle_name=N'{middle_name}'" +
 				   $" AND birth_date=N'{birth_date}' AND email=N'{email}' AND phone=N'{phone}'";
 		}
-		
+		public string GetUpdateString()
+		{
+			return GetCondition().Replace(" AND ", ",");
+		}
+
 	}
 }
